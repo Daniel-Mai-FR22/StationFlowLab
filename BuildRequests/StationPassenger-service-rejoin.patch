@@ -1,0 +1,39 @@
+*** Begin Patch
+*** Update File: Assets/TrainStation/Social/Runtime/StationPassenger.cs
+@@
+             nextActivityPathAt = Time.time + .32f + (Math.Abs(randomSeed % 11) / 11f) * .09f;
++            var leader = walkingGroup.CurrentLeader;
++            // A service visitor has rejoined when physically beside the group.
++            // Its historical slot may be beyond the leader on a narrow path;
++            // do not require walking through a companion to record the reunion.
++            // Recovery still requires arrival at its explicit safe destination.
++            if (returning && !recoveringWalkingGroup && HasPhysicallyRejoinedWalkingGroup(leader))
++            {
++                FinishActivityReturn(true);
++                return;
++            }
+             if (!walkingGroup.TryGetDestination(this, out var destination, out var waiting))
+@@
+-            var leader = walkingGroup.CurrentLeader;
+             var leaderGap = leader ? leader.transform.position - transform.position : Vector3.zero;
+@@
+-        void FinishGroupStopIfStill()
++        bool HasPhysicallyRejoinedWalkingGroup(StationPassenger leader)
++        {
++            if (!leader || leader == this || !leader.motion || !motion || !walkingGroup) return false;
++            var ownAgent = motion.agent;
++            var leaderAgent = leader.motion.agent;
++            if (!ownAgent || !leaderAgent || !ownAgent.isActiveAndEnabled || !leaderAgent.isActiveAndEnabled ||
++                !ownAgent.isOnNavMesh || !leaderAgent.isOnNavMesh) return false;
++            var gap = leader.transform.position - transform.position;
++            if (Mathf.Abs(gap.y) > .15f) return false;
++            gap.y = 0f;
++            float clearance = Mathf.Max(.72f, ownAgent.radius + leaderAgent.radius + .06f);
++            float rejoin = walkingGroup.rejoinDistance;
++            if (gap.sqrMagnitude < clearance * clearance || gap.sqrMagnitude > rejoin * rejoin ||
++                !StationCrowdSpace.IsPositionAvailable(transform.position, motion, .72f)) return false;
++            return !NavMesh.Raycast(ownAgent.nextPosition, leaderAgent.nextPosition, out _, ownAgent.areaMask);
++        }
++
++        void FinishGroupStopIfStill()
+*** End Patch

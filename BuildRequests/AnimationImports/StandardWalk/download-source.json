@@ -1,0 +1,22 @@
+{
+  "source": "https://www.mixamo.com/#/?page=2&query=walking",
+  "provider": "Adobe Mixamo, authenticated user session",
+  "visibleTitle": "Walking",
+  "visibleDescription": "Male Standard Walk",
+  "character": "X Bot",
+  "speed": 50,
+  "stride": 50,
+  "overdrive": 50,
+  "characterArmSpace": 50,
+  "trim": [0,100],
+  "displayedFrameCount": 38,
+  "inPlace": false,
+  "mirror": false,
+  "format": "FBX Binary",
+  "skin": "Without Skin",
+  "framesPerSecond": 30,
+  "keyframeReduction": "none",
+  "downloadedDate": "2026-09-28",
+  "sha256": "9e8227f28aaf41e3adb5f5089b1df221a7609ef026b6714ca4c5e0493efcfda0",
+  "purpose": "Compare a standard walking cycle with the current long-stride station walk. Original root travel retained for measured cadence calibration."
+}

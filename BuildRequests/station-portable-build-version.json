@@ -1,0 +1,10 @@
+{
+    "schema": "stationflow.station_portable_build_version.v1",
+    "projectName": "StationFlowLab",
+    "productName": "GareFlowDemo",
+    "releaseVersion": "0.2.0",
+    "nextBuildNumber": 24,
+    "lastReservedBuildNumber": 23,
+    "lastReservedUtc": "2026-10-28T20:33:23.5777591Z",
+    "lastReservedDirectory": "C:\\Users\\DMAI\\Desktop\\GareFlowDemo_v0.2.0_b023"
+}

@@ -1,0 +1,81 @@
+GareFlowDemo — simulation de gare et collecte de données
+
+Commandes et collecte
+Ouvrir « Collecte » pour choisir les caméras et les flux à enregistrer.
+Start reprend la simulation à ×1. Les commandes ×4 et ×8 restent bloquées
+pendant la collecte, y compris en pause. Stop finalise les fichiers et suspend
+la simulation. Chaque nouveau Start crée une session indépendante.
+
+La date locale actuelle devient la date simulée à chaque lancement du jeu.
+Les horaires, charges, groupes et profils sont tirés avec une nouvelle graine
+selon les contraintes de la gare. La graine et les paramètres restent documentés.
+
+Stockage portable
+Les captures se trouvent à côté du jeu :
+    Captures/TrainStationDaily/run-AAAAMMJJ-hhmmss-mmm-identifiant/
+Le nom utilise l'heure réelle UTC au début de collecte. Le manifeste indique
+aussi le fuseau local et son décalage ; par exemple 16h45 UTC = 18h45 à Paris
+quand le décalage local vaut +02:00. La date de simulation est distincte.
+Le chemin est recalculé depuis l'emplacement de l'application sur chaque PC.
+
+Format de capture actuel
+    schema = stationflow.station_capture.v4
+    storageLayout = per_agent.v3
+    recordEncoding = references-and-state-revisions.v1
+Seul ce nouveau format est pris en charge par le lecteur fourni.
+
+normalization.json décrit le codec de références. sync.jsonl conserve l'horloge
+originale une fois par syncSampleId. Les autres observations référencent cet ID.
+record-definitions.jsonl conserve les modèles et définitions partagés ;
+rosters.jsonl conserve les ensembles ordonnés d'agents par révision.
+
+Données individuelles
+agents/index.json associe l'identité logique exacte à son dossier.
+Les fichiers de chaque voyageur restent dans agents/agent-.../ :
+    profile.json            profil et voyage sans champs en double, si coché
+    state-changes.jsonl      état initial, changements et checkpoints
+    trajectories.jsonl      observations de mouvement + références
+    animations.jsonl        phases observées + références
+    decisions.jsonl         contexte et choix
+    events.jsonl            événements individuels
+Les flux sont créés selon les options et les observations effectives.
+Les métadonnées nécessaires aux références accompagnent leurs flux.
+Un agentId représente un voyage. actorSlotId représente un emplacement visuel
+réutilisable et ne doit pas servir à fusionner deux voyageurs.
+state-checkpoints.jsonl indexe les checkpoints par offsets d'octets UTF-8.
+
+Squelettes 3D
+Le toggle « Squelettes 3D » est indépendant des autres flux.
+skeleton-definitions.jsonl décrit chaque rig une seule fois. Chaque voyageur
+observé possède skeleton-bindings.jsonl, skeleton-poses.bin et skeleton-index.jsonl.
+Les poses contiennent les XYZ monde des 55 joints Humanoid, doigts compris
+quand disponibles, en mètres float32 little-endian, avec masque de validité.
+Les os absents sont invalides : leurs XYZ nuls ne désignent pas l'origine.
+Une pose est partagée par les caméras du même batch, avec le syncSampleId
+original de l'image. Sans vidéo, la collecte suit la cadence régulière 5 Hz.
+Aucun quaternion d'os, muscle, keypoint 2D ou calcul d'occlusion n'est exporté.
+Le lecteur fourni expose ces poses sous forme de tableaux Python ; son
+export d'analyse produit skeleton-poses.jsonl sans modifier le binaire source.
+
+Vidéos et synchronisation
+Chaque video/<cameraId>/ contient calibration.json, camera-states.jsonl,
+frames.jsonl et les segments AVI/MJPEG. Les matrices sont enregistrées une fois
+par cameraStateId, puis chaque image référence cette révision et son syncSampleId.
+Une modification de caméra crée une révision avant l'image concernée.
+Les positions, orientations, phases d'animation et temps originaux gardent
+leur précision ; aucun échantillon n'est supprimé par la normalisation.
+
+Les images sont demandées suivant les frames Unity effectivement admises.
+Les FPS réels restent variables et sont enregistrés ; aucun sélecteur de FPS
+fixe n'est utilisé. L'AVI conserve une cadence nominale de lecture de 30 FPS.
+Les sidecars et l'horloge font autorité pour le temps réel et simulé.
+Stop vide les files de traitement avant de marquer la session complete.
+Un arrêt brutal peut laisser une session recording ou failed : vérifier
+le manifeste et les références avant analyse.
+
+Lire les données
+Chaque capture emporte TrainStationData/read_capture.py et LireDonnees.fr.txt.
+Le lecteur utilise uniquement la bibliothèque standard de Python 3.10 ou plus récent. Consulter
+LireDonnees.fr.txt pour inspecter, vérifier et exporter une vue d'analyse
+développée. Les documents DataSchema.fr.html et data-schema.json décrivent
+les champs physiques et les objets logiques reconstruits.

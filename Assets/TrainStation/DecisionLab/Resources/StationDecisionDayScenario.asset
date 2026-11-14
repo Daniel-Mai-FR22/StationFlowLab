@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5961cc66ff2ebde4a8d5614b834e902e, type: 3}
+  m_Name: StationDecisionDayScenario
+  m_EditorClassIdentifier: Assembly-CSharp::StationFlow.TrainStation.DecisionLab.StationDecisionDayScenario
+  scenarioDate: 2026-10-06
+  seed: 20261006
+  visualActorRatio: 0.2
+  earlyRatio: 0.25
+  ordinaryRatio: 0.6
+  lateRatio: 0.15
+  groupPeopleFraction: 0.35
+  earlyLeadMinutes: {x: 20, y: 40}
+  ordinaryLeadMinutes: {x: 10, y: 20}
+  lateLeadMinutes: {x: 3, y: 7}
+  defaultTimeScale: 4
+  activeActorLimit: 128
+  minimumEntryIntervalSeconds: 1.1
+  groupCohesionDistance: 4
+  maximumRegroupSeconds: 8
+  alightingStopovers:
+    serviceVisitorFraction: 0.4
+    minimumVisits: 1
+    maximumVisits: 2
+    minimumBudgetSeconds: 300
+    maximumBudgetSeconds: 720
+    infoPreference: 1
+    shopPreference: 1
+    toiletPreference: 1
+    exitPreference: 0.15
+    minimumInformationNeed: 0.3
+    minimumShoppingNeed: 0.2
+    minimumToiletNeed: 0.2
+  assumptions: "Illustrative fictional demand. Each visible actor represents a weighted
+    passenger cohort; visible groups contain2\u20134 actors. Lead ranges and group
+    share are configurable assumptions, not fitted station observations."

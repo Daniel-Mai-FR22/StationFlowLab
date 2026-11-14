@@ -1,0 +1,284 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 187db215e29641f49c7768a9fac811a7, type: 3}
+  m_Name: LabMatchedXBotLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::StationFlow.HumanAnimation.HumanAnimationLibrary
+  controller: {fileID: 9100000, guid: 5f9b819806107bb449258c257b502dce, type: 2}
+  upperBodyMask: {fileID: 31900000, guid: 393af8a5f47624f4fa0a8a296846b4cd, type: 2}
+  motions:
+  - id: mixamo_jump_58b4fe007f
+    displayName: jump
+    stateName: Base Layer.mixamo_jump_58b4fe007f
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/jump.fbx
+    clip: {fileID: 7400000, guid: 4733675267e821c438ead2bb9207185c, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 0
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: mixamo_left_strafe_2cddaa0fbc
+    displayName: left strafe
+    stateName: Base Layer.mixamo_left_strafe_2cddaa0fbc
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/left
+      strafe.fbx
+    clip: {fileID: 7400000, guid: 637c68249df47914398d4c63cb503e10, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 1
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: mixamo_left_strafe_walking_c95be7c053
+    displayName: left strafe walking
+    stateName: Base Layer.mixamo_left_strafe_walking_c95be7c053
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/left
+      strafe walking.fbx
+    clip: {fileID: 7400000, guid: 15ffeb18145805a408ad27dcab56c952, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 1
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: mixamo_right_strafe_9184f208f6
+    displayName: right strafe
+    stateName: Base Layer.mixamo_right_strafe_9184f208f6
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/right
+      strafe.fbx
+    clip: {fileID: 7400000, guid: 3188bbe375eb7464188bc82ceb4d5072, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 1
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: mixamo_right_strafe_walking_1918c30aab
+    displayName: right strafe walking
+    stateName: Base Layer.mixamo_right_strafe_walking_1918c30aab
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/right
+      strafe walking.fbx
+    clip: {fileID: 7400000, guid: c0ca8cd212a716446beb6a19f9d8891a, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 1
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: mixamo_running_13cb38ac3d
+    displayName: running
+    stateName: Base Layer.mixamo_running_13cb38ac3d
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/running.fbx
+    clip: {fileID: 7400000, guid: f0a9654d36418a94eb48f7f63aa77ae2, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 1
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: mixamo_walking_9af7b48b6f
+    displayName: walking
+    stateName: Base Layer.mixamo_walking_9af7b48b6f
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/walking.fbx
+    clip: {fileID: 7400000, guid: 1569bf91002484a40bc8456d41d56b86, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 1
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: mixamo_idle_b7aab6de7b
+    displayName: idle
+    stateName: Base Layer.mixamo_idle_b7aab6de7b
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/idle.fbx
+    clip: {fileID: 7400000, guid: 87117d96863b1b04b946d2f668108580, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 1
+    blendIn: 0.18
+    source: 0
+    category: 1
+  - id: mixamo_neutral_idle_bcadd5d2cf
+    displayName: Neutral Idle
+    stateName: Base Layer.mixamo_neutral_idle_bcadd5d2cf
+    sourceAssetPath: Assets/TrainStation/DecisionLab/Animation/MatchedXBot/DecisionLab_Idle_XBot.fbx
+    clip: {fileID: -203655887218126122, guid: e3acee64fb450584e91fe2a69a404c5f, type: 3}
+    blendParameter: 
+    blendChildren: []
+    loop: 1
+    blendIn: 0.18
+    source: 0
+    category: 1
+  - id: mixamo_left_turn_8510dd133a
+    displayName: left turn
+    stateName: Base Layer.mixamo_left_turn_8510dd133a
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/left
+      turn.fbx
+    clip: {fileID: 7400000, guid: d631be24d481ddb45b5674075c9796dd, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 0
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: mixamo_left_turn_90_c4c159e68f
+    displayName: left turn 90
+    stateName: Base Layer.mixamo_left_turn_90_c4c159e68f
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/left
+      turn 90.fbx
+    clip: {fileID: 7400000, guid: f5d91a3488fae2945b2837862e7b5790, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 0
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: mixamo_right_turn_9436750205
+    displayName: right turn
+    stateName: Base Layer.mixamo_right_turn_9436750205
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/right
+      turn.fbx
+    clip: {fileID: 7400000, guid: 5ff6ba5c7b375df4fae9e233fb5ad65c, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 0
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: mixamo_right_turn_90_e0abf15f6a
+    displayName: right turn 90
+    stateName: Base Layer.mixamo_right_turn_90_e0abf15f6a
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/right
+      turn 90.fbx
+    clip: {fileID: 7400000, guid: f6f7e05642160f746934190d52b13e83, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 0
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: mixamo_sit_down_a11f1ca01a
+    displayName: Sit Down
+    stateName: Base Layer.mixamo_sit_down_a11f1ca01a
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Sit_Down.fbx
+    clip: {fileID: 7400000, guid: 7f10fd7bbcd18fe4fa12bae72b0b1cdf, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 0
+    blendIn: 0.18
+    source: 0
+    category: 1
+  - id: mixamo_sitting_idle_a1128588e0
+    displayName: Sitting Idle
+    stateName: Base Layer.mixamo_sitting_idle_a1128588e0
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Sitting_Idle.fbx
+    clip: {fileID: 7400000, guid: 22c88a62dd02d8c4eb834ef11e7e86cb, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 1
+    blendIn: 0.18
+    source: 0
+    category: 1
+  - id: mixamo_stand_up_29c4bb683a
+    displayName: Stand Up
+    stateName: Base Layer.mixamo_stand_up_29c4bb683a
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Stand_Up.fbx
+    clip: {fileID: 7400000, guid: 9a10a25d97a7a4042a5dfa9950496732, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 0
+    blendIn: 0.18
+    source: 0
+    category: 1
+  - id: mixamo_talking_2584574f06
+    displayName: Talking
+    stateName: Base Layer.mixamo_talking_2584574f06
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Talking.fbx
+    clip: {fileID: 7400000, guid: 877307f1926c4044b9a57fbbd32462bc, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 0
+    blendIn: 0.18
+    source: 0
+    category: 2
+  - id: mixamo_waving_20f6cde0fd
+    displayName: Waving
+    stateName: Base Layer.mixamo_waving_20f6cde0fd
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Waving.fbx
+    clip: {fileID: 7400000, guid: 9eaa256c3a69d734bbf2398fd7f9cda4, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 0
+    blendIn: 0.18
+    source: 0
+    category: 2
+  - id: mixamo_male_standard_walking_ef7424170f
+    displayName: male standard walking
+    stateName: Base Layer.mixamo_male_standard_walking_ef7424170f
+    sourceAssetPath: Assets/TrainStation/DecisionLab/Animation/MatchedXBot/DecisionLab_Walk_XBot.fbx
+    clip: {fileID: -203655887218126122, guid: 26ccc534d31c8f94888aaaf9bd37dbf3, type: 3}
+    blendParameter: 
+    blendChildren: []
+    loop: 1
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: station_sweep
+    displayName: Sweeping / original station animation
+    stateName: Base Layer.station_sweep
+    sourceAssetPath: Assets/TrainStation/Social/Resources/TrainStationSocial/Clips/Station_Sweeping.anim
+    clip: {fileID: 7400000, guid: 88761ce4442805447b8ad404e9d640b9, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 1
+    blendIn: 0.25
+    source: 2
+    category: 3
+  - id: station_left_turn_extracted_yaw
+    displayName: Station left turn / extracted Mixamo yaw
+    stateName: Base Layer.station_left_turn_extracted_yaw
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/left
+      turn 90.fbx
+    clip: {fileID: 7400000, guid: a2017b939074ed745bda3a84fda14ac5, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 0
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: station_right_turn_extracted_yaw
+    displayName: Station right turn / extracted Mixamo yaw
+    stateName: Base Layer.station_right_turn_extracted_yaw
+    sourceAssetPath: Assets/HumanAnimation/Source/Mixamo/Animations/Locomotion/right
+      turn 90.fbx
+    clip: {fileID: 7400000, guid: 00a2ea1ecc9e6134c9c6ef7a91060ecf, type: 2}
+    blendParameter: 
+    blendChildren: []
+    loop: 0
+    blendIn: 0.18
+    source: 0
+    category: 0
+  - id: station_adaptive_walk
+    displayName: Marche adaptative - pas raccourcis
+    stateName: Base Layer.station_adaptive_walk
+    sourceAssetPath: Assets/TrainStation/DecisionLab/Resources/MatchedXBot/LabMatchedXBot.controller
+    clip: {fileID: -203655887218126122, guid: 26ccc534d31c8f94888aaaf9bd37dbf3, type: 3}
+    blendParameter: StationWalkStride
+    blendChildren:
+    - clip: {fileID: 7400000, guid: 6b55b1d2ee2156c46ae9fb5f38d94560, type: 2}
+      threshold: 0
+    - clip: {fileID: -203655887218126122, guid: 26ccc534d31c8f94888aaaf9bd37dbf3, type: 3}
+      threshold: 1
+    loop: 1
+    blendIn: 0.15
+    source: 2
+    category: 0

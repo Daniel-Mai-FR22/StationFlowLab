@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 187db215e29641f49c7768a9fac811a7, type: 3}
+  m_Name: DiagnosticLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::StationFlow.HumanAnimation.HumanAnimationLibrary
+  controller: {fileID: 9100000, guid: 529d80544cd6ff048a5e6b7671bfd3dd, type: 2}
+  upperBodyMask: {fileID: 31900000, guid: 393af8a5f47624f4fa0a8a296846b4cd, type: 2}
+  motions:
+  - id: diagnostic_neutral
+    displayName: Neutral pose / diagnostic
+    stateName: Base Layer.diagnostic_neutral
+    sourceAssetPath: Assets/HumanAnimation/Resources/HumanAnimation/Diagnostics/Clips/diagnostic_neutral.anim
+    clip: {fileID: 7400000, guid: 5f4a3864af5c2ff458d6a775aa4426e7, type: 2}
+    loop: 1
+    blendIn: 0.18
+    source: 1
+    category: 4
+  - id: diagnostic_reach
+    displayName: Arm reach / diagnostic
+    stateName: Base Layer.diagnostic_reach
+    sourceAssetPath: Assets/HumanAnimation/Resources/HumanAnimation/Diagnostics/Clips/diagnostic_reach.anim
+    clip: {fileID: 7400000, guid: 688c9b38233f70643871fa4d6579f668, type: 2}
+    loop: 1
+    blendIn: 0.18
+    source: 1
+    category: 4
+  - id: diagnostic_stride
+    displayName: Alternating limbs / diagnostic
+    stateName: Base Layer.diagnostic_stride
+    sourceAssetPath: Assets/HumanAnimation/Resources/HumanAnimation/Diagnostics/Clips/diagnostic_stride.anim
+    clip: {fileID: 7400000, guid: 826ca5a5fee99d843b05bc43488dfa9c, type: 2}
+    loop: 1
+    blendIn: 0.18
+    source: 1
+    category: 4

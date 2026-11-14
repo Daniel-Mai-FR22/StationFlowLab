@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ac69b40afb1a0488b02e372de2f249, type: 3}
+  m_Name: StationRailSchedule
+  m_EditorClassIdentifier: Assembly-CSharp::StationFlow.TrainStation.RailOperations.StationRailSchedule
+  startHour: 14
+  startMinute: 20
+  cycleDurationSeconds: 720
+  services:
+  - serviceId: valmont-ter-862421
+    trainNumber: 862421
+    origin: Dijon
+    destination: Lyon-Part-Dieu
+    trackNumber: 2
+    arrivalOffsetSeconds: -60
+    departureOffsetSeconds: 120
+    approachDurationSeconds: 60
+    departureDurationSeconds: 50
+    doorDurationSeconds: 8
+  - serviceId: valmont-ter-175830
+    trainNumber: 175830
+    origin: "Orl\xE9ans"
+    destination: Tours
+    trackNumber: 4
+    arrivalOffsetSeconds: -30
+    departureOffsetSeconds: 150
+    approachDurationSeconds: 60
+    departureDurationSeconds: 50
+    doorDurationSeconds: 8
+  - serviceId: valmont-ter-882306
+    trainNumber: 882306
+    origin: Strasbourg
+    destination: Nancy
+    trackNumber: 5
+    arrivalOffsetSeconds: 60
+    departureOffsetSeconds: 180
+    approachDurationSeconds: 60
+    departureDurationSeconds: 50
+    doorDurationSeconds: 8
+  - serviceId: valmont-ter-841712
+    trainNumber: 841712
+    origin: Paris-Est
+    destination: Reims
+    trackNumber: 7
+    arrivalOffsetSeconds: 240
+    departureOffsetSeconds: 360
+    approachDurationSeconds: 60
+    departureDurationSeconds: 50
+    doorDurationSeconds: 8

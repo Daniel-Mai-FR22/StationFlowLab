@@ -1,0 +1,163 @@
+LECTURE DES DONNÉES NORMALISÉES STATIONFLOW
+=========================================
+
+Format pris en charge : stationflow.station_capture.v4, per_agent.v3,
+recordEncoding = references-and-state-revisions.v1.
+Python 3.10 ou plus récent, bibliothèque standard uniquement.
+Le lecteur est fourni avec le jeu dans TrainStationData/read_capture.py.
+
+1. Vérifier les références
+-------------------------
+Dans un terminal, remplacer les chemins entre guillemets :
+
+python "TrainStationData/read_capture.py" "Captures/TrainStationDaily/run-..." inspect
+
+Le résultat JSON indique le runId, la version et les nombres de références.
+Une référence manquante, étrangère ou dupliquée, un index incohérent ou un
+chemin qui sort de la collecte provoque une erreur et un code de sortie 1.
+Cette inspection vérifie la structure ; elle ne decode pas les vidéos AVI.
+
+2. Lire les observations en Python
+----------------------------------
+Placer read_capture.py sur le chemin des modules Python, puis :
+
+from read_capture import CaptureReader
+
+with CaptureReader("Captures/TrainStationDaily/run-...") as capture:
+    capture.validate_references()
+    scenario = capture.read_json("scenario.json")
+    for frame in capture.iter_records("video/HALL-01/frames.jsonl"):
+        stamp = frame["stamp"]
+        camera = frame["camera"]
+        print(stamp["syncSampleId"], stamp["realElapsedSeconds"])
+
+L'identifiant de caméra est un exemple : utiliser les directories déclarées
+dans manifest.json/cameraResults. Pour un voyageur, utiliser directory dans
+agents/index.json, puis trajectories.jsonl, animations.jsonl, decisions.jsonl,
+events.jsonl, profile.json ou skeleton-poses.bin selon les options enregistrées.
+
+read_json et iter_records fournissent des objets logiques développés :
+- les références syncSampleId retrouvent l'horloge canonique originale ;
+- definitionId retrouve les valeurs par défaut propres au type de record ;
+- rosterId retrouve la liste ordonnee exacte des voyageurs actifs ;
+- stateId applique l'etat initial, les modifications puis les checkpoints ;
+- cameraStateId retrouve la pose et les matrices originales de la caméra ;
+- les alias du profil, les politiques partagées et profileRef sont résolus ;
+- servicesFile retrouve les services du fichier timetable.json.
+
+Les fichiers sources restent inchangés. manifest conserve la version réelle.
+iter_raw_records donne les records physiques stockes, sans les developper.
+Pour skeleton-poses.bin, il decode les nombres binaires et conserve syncSampleId
+au lieu de lui substituer captureStamp.
+
+Le lecteur utilise un index SQLite temporaire pour les horloges et révisions,
+avec un cache limite en mémoire. Il ne crée pas une copie développée complète
+de la collecte. Toujours utiliser le bloc with pour fermer et supprimer cet
+index, y compris en cas d'erreur. Le dossier temporaire du PC doit disposer
+d'assez d'espace pour l'index ; les observations denses restent lues en flux.
+
+3. Exporter une vue d'analyse développée
+---------------------------------------
+Collecte entière, sans copier les vidéos :
+
+python "TrainStationData/read_capture.py" "Captures/TrainStationDaily/run-..." export --output "AnalyseDeveloppee"
+
+Un seul voyageur, avec son identifiant logique exact :
+
+python "TrainStationData/read_capture.py" "Captures/TrainStationDaily/run-..." export --output "AnalyseVoyageur" --agent "identifiant-logique"
+
+Le dossier de destination doit etre nouveau et extérieur a la collecte.
+Aucun écrasement n'est autorisé. Un fichier EXPORT_INCOMPLETE.txt signale un
+export interrompu ; ne pas consommer une vue tant que ce fichier subsiste.
+
+analysis-view.json identifie explicitement une vue d'analyse :
+stationflow.expanded_analysis_view.v1 ou stationflow.agent_analysis_view.v1.
+Il contient le manifeste source v4, sans le renommer en un autre format de
+collecte. Les records exportes ont leurs références résolues. La vue d'un
+voyageur inclut ses horloges utilisees, son profil si active, le scenario et
+les horaires si actifs. Les vidéos AVI restent dans la collecte originale.
+La vue complète inclut les calibrations, les sidecars de toutes les caméras
+et les observations developpees, mais aucun media video.
+
+4. Regles de synchronisation a conserver
+---------------------------------------
+La clé est (runId, syncSampleId). Ni unityFrame ni simulationSeconds ne
+remplacent cette clé : plusieurs echantillons peuvent partager une frame,
+et une pause fige le temps simulé sans figer le temps reel des observations.
+
+Le temps UTC et le temps monotone sont des mesures originales distinctes.
+Les FPS des sidecars reposent sur les stamps de rendu originaux. La cadence
+nominale AVI et videoTimeSeconds servent a la lecture, pas a reconstruire
+le temps reel. Conserver les segments, requestId et les pertes de frames.
+
+Les checkpoints d'etat complet apparaissent aux observations 1, 257, 513,
+et ainsi de suite. state-checkpoints.jsonl fournit les offsets physiques
+UTF-8 exacts des etats et observations correspondants, fins de ligne incluses.
+Le lecteur contrôle ces offsets et refuse les références vers un etat futur
+ou obsolète. Les voyageurs logiques restent distincts des slots d'acteurs
+réutilisés par Unity.
+
+Une collecte finalisée doit avoir status=complete et aucune erreur. Les
+options du manifeste distinguent un flux désactivé d'un flux actif vide.
+Pendant une collecte, les workers peuvent vider leurs fichiers a des instants
+différents ; privilégier une collecte finalisée pour une analyse complète.
+5. Lire les squelettes 3D
+-------------------------
+Le toggle skeletons est indépendant de profiles, trajectories, animations,
+events et video. Il ne calcule aucun keypoint 2D, aucune projection ni
+visibilité dans une image. Les coordonnées sont les positions monde Unity
+réellement observées des articulations, en mètres, après animation.
+
+Le fichier commun skeleton-definitions.jsonl conserve une définition par rigId.
+Les 55 entrées suivent strictement les indices HumanBodyBones de Unity :
+jointNames donne les noms, parentIndices le plus proche ancêtre mappé
+(-1 pour une racine ou une articulation absente), transformPaths les chemins
+réels relatifs à l'Animator. Un chemin vide signifie articulation non mappée.
+Les parentIndices ne sont pas nécessairement triés. rigId est un SHA256
+canonique de la définition ; il ne dépend pas de la position de l'agent.
+
+Dans chaque dossier d'agent observé :
+- skeleton-bindings.jsonl associe bindingId au rigId, à l'avatar et au slot ;
+- skeleton-poses.bin contient les échantillons denses XYZ float32 ;
+- skeleton-index.jsonl indique un offset exact toutes les 256 poses,
+  aux observations 1, 257, 513, etc. Aucun échantillon n'est retiré.
+
+Utiliser le même bloc with que dans l'exemple précédent, puis :
+
+for pose in capture.iter_records(agent_directory + "/skeleton-poses.bin"):
+    stamp = pose["captureStamp"]
+    positions = pose["jointPositionsWorld"]
+    valid = pose["valid"]
+    for joint_index, xyz in enumerate(positions):
+        if valid[joint_index]:
+            print(stamp["syncSampleId"], joint_index, xyz)
+
+agent_directory vient de agents/index.json. positions contient 55 triplets
+[x, y, z] dans l'ordre de jointNames. valid est une liste de 55 booléens.
+Une articulation invalide conserve [0, 0, 0] : ne pas interpréter cette valeur
+comme une articulation située à l'origine. valid ne signifie pas visible
+dans une caméra ; les articulations masquées par un obstacle restent valides.
+
+Une pose développée contient agentId, captureStamp, sampleId, time, bindingId,
+rigId, jointPositionsWorld et valid. Le temps float32 time est le temps simulé ;
+la clock complète reste la référence pour joindre le rendu vidéo. Le pose
+partagé est lu une fois avant le lot de caméras. La cadence réelle peut varier.
+Aucune rotation d'os, donnée de force musculaire ou donnée de maillage n'est
+stockée dans ce flux. Les rotations des caméras et leurs calibrations sont
+des données séparées déjà accessibles au même syncSampleId.
+
+L'en-tête binaire fait 16 octets : ASCII SFLPOSE1 (8), uint32 version=1,
+uint32 headerBytes=16. Tous les nombres sont little-endian. Chaque record
+contient uint32 byteLength (incluant ce champ), int64 syncSampleId, int32
+sampleId, int32 bindingId, int32 jointCount=55, int32 maskByteCount=7,
+float32 time, 7 octets de masque puis 165 float32 XYZ. Les bits du masque
+commencent au bit faible de l'octet ; le bit inutilisé final vaut zéro.
+Le record fait donc 699 octets. Les valeurs XYZ sont finies ; les triplets
+invalides valent zéro. Les changements de binding sont effectifs exactement
+à leur première pose. Le lecteur contrôle le format, le hash du rig, les
+références, les séquences, les masques et tous les offsets d'index.
+
+L'export d'analyse remplace skeleton-poses.bin par skeleton-poses.jsonl,
+avec les coordonnées décodées et les clocks résolues. Il conserve les
+définitions et bindings nécessaires. La collecte binaire originale reste
+intacte ; la vue d'analyse peut être plus volumineuse.

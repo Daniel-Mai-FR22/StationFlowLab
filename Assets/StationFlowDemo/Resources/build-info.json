@@ -1,0 +1,87 @@
+{
+  "schema": "stationflow.build.v1",
+  "unityVersion": "6000.5.9f1",
+  "createdUtc": "2026-10-20T11:31:08.385210+00:00",
+  "sourceFiles": [
+    {
+      "path": "Assets/StationFlowDemo/Characters/CitizenRig.cs",
+      "sha256": "374cedb732fcb8a32fefe20992fd8a36c196b9152c4a63fb355115a745873835"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Characters/Editor/CitizenTextureImport.cs",
+      "sha256": "69ca312e08c8cbe28abc08af55626b9bad709c9b16f2a31161c58d8f27c533c3"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Editor/DemoBuild.cs",
+      "sha256": "8109b1e593e8f7bdde40c304b9c9f4d150c2b174b34034ebc74e00eee7ed4c05"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Environment/CityHorizon.cs",
+      "sha256": "67a9d0b0c41890f2127828caee76606240c48ea758b5e8043f68bca711157e3f"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Environment/FollowCameraObstacles.cs",
+      "sha256": "b05f221de89f79e4164e0731d9f397eb8b235a36c8f36a9f94c6ccf34aa1a692"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Environment/Resources/StationFlowWorldText.shader",
+      "sha256": "7d1a7833e080e9a1304d0e18fab71eb390ed0a66fa9666a87e6161ad696b5911"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Environment/WorldDetails.cs",
+      "sha256": "2b97e16c4960adc97bbcf6453fc97e8f0a61a22670c36ba146de3dddba63f0bc"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Environment/WorldTextMaterial.cs",
+      "sha256": "e5ab1b5a35bc512485f049b711aa2151db9789398ce47249e9f0649870fbe030"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Rendering/UrbanRenderQuality.cs",
+      "sha256": "4aa395a2764db84e94d75e00d14a9a5f7649aa787b494a74339184d2ed424474"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Runtime/ActorVisual.cs",
+      "sha256": "b5c7f8d3bd14abdbccede5714f1eaa50322d0baa681528afa3d75fd000e1664b"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Runtime/DemoController.cs",
+      "sha256": "5a455a3f81af8dfd71e132381480f80d43a8224b30850a3fac098c4f91ac1ac3"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Runtime/DemoDashboard.cs",
+      "sha256": "cc74b0138fe766b0df36b511a7ac9669d696b2450b2a8e101e2b819538d7676b"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Runtime/LivingQualityCheck.cs",
+      "sha256": "d83b2191a94accf4f6e647449871b1337e1f19fdcb3adef3f9ed9e1b931b9139"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Runtime/WorldBuilder.cs",
+      "sha256": "6d0d485e65fb50b8d57a802a071ce772f42da480a4cded5f5d1203b1f44b89b9"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Sensors/CameraRig.cs",
+      "sha256": "9cdca6f9ddda5c08b22a302f1b9ce936cb8805273aff2cf56d706ed742f4afef"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Sensors/Resources/StationFlowEquidistantFisheye.shader",
+      "sha256": "6d96e4c95100c23f01ffd2909fc1c66636f43502a9fb13c7b21336b3f4518041"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Sensors/Resources/StationFlowValidationUnlit.shader",
+      "sha256": "d567384be9d0db9bc4533657d9b0807fe3019597538faeb5f4ea439679ddafac"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Sensors/SensorProjectionChecks.cs",
+      "sha256": "7ae8632dd5a21d4bfb37103c8f3e428c725d0dd8dfe061df765def2fcc35ad45"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Simulation/CrowdNavigation.cs",
+      "sha256": "7f26d00b0fc97872203050dffdd5337c6f5f43c6ec743eadeb5588c668201681"
+    },
+    {
+      "path": "Assets/StationFlowDemo/Simulation/TrafficSimulation.cs",
+      "sha256": "0f2f9989f757db1b3e30ccdf5470fcb42513e92843ada554a41f81675261cf8d"
+    }
+  ]
+}
